@@ -1,48 +1,83 @@
 ---
 title: "Nodes"
-description: "The fundamental units of processing in an Atoms graph."
+description: "The fundamental building blocks of your agent's logic."
 ---
 
-A **Node** is a stateful entity that processes events. It is the base class for everything in your agent graph, including Agents.
+A **Node** is the basic unit of computation in the Atoms graph. Every "agent" or functional component you build is ultimately a Node.
 
-## Capabilities
+## What is a Node?
 
-All nodes share a common set of capabilities:
+In the conceptual graph, a Node is a vertex that:
+1.  **Receives Events**: Accepts incoming signals (like user audio, text, or system triggers).
+2.  **Processes Logic**: Executes your custom Python code, business rules, or AI inference.
+3.  **Sends Events**: Manually emits new events to passing control or data to other parts of the graph.
 
-<CardGroup cols={2}>
-    <Card title="Event Queue" icon="layer-group">
-        Each node has its own async queue for processing events sequentially.
-    </Card>
-    <Card title="State Management" icon="database">
-        Nodes can maintain state across the lifetime of a session.
-    </Card>
-    <Card title="Context" icon="book-open">
-        Access to shared session context and history.
-    </Card>
-    <Card title="Relationships" icon="share-nodes">
-        Nodes know their parents and children in the DAG.
-    </Card>
-</CardGroup>
+## Two Types of Nodes
 
-## The Node Interface
+Atoms provides two primary base classes to inherit from, depending on your needs.
 
-Every node implements the `BaseNode` interface.
+### 1. The Output Agent (`OutputAgentNode`)
+
+This is the most common node type. It is a full-featured conversational agent designed to interact with Large Language Models (LLMs).
+
+**Key Features:**
+*   **Auto-Interruption**: Automatically handles user interruptions during playback only when the user is speaking.
+*   **Streaming**: Managers the complexity of streaming LLM tokens to the user in real-time.
+*   **Context Management**: Maintains conversation history automatically.
+
+**Use Case**: The "brain" of your bot—Sales Agent, Support Agent, Triage Agent.
 
 ```python
-class Node:
-    async def process_event(self, event: SDKEvent):
-        """Process an incoming event."""
-        pass
+from smallestai.atoms import OutputAgentNode
 
-    async def send_event(self, event: SDKEvent):
-        """Send an event to children nodes."""
-        pass
+class MyAgent(OutputAgentNode):
+    def __init__(self):
+        super().__init__(
+            model="gpt-4o",
+            system_prompt="You are a helpful assistant."
+        )
 ```
 
+### 2. The Base Node (`Node`)
 
-## Lifecycle
+The `Node` class is the raw primitive. It gives you full control but assumes nothing. It is perfect for deterministic logic, API calls, or routing decisions.
 
-1.  **Initialization**: Node is created and configured.
-2.  **Registration**: Node is added to a `Session`.
-3.  **Processing**: Node receives events via `process_event`.
-4.  **Teardown**: Session ends, node cleans up resources.
+**Key Features:**
+*   **Raw Event Access**: You get the raw event and decide exactly what to do with it.
+*   **No Overhead**: No LLM context or streaming logic unless you build it.
+
+**Use Case**: Router, API Fetcher, Database Logger, Analytics Tracker.
+
+```python
+from smallestai.atoms.agent.nodes import Node
+
+class RouterNode(Node):
+    async def process_event(self, event):
+        # Deterministic logic
+        if "sales" in event.content:
+             # Manually send event to the next node
+            await self.send_event(event, destination="SalesAgent")
+        else:
+            await self.send_event(event, destination="SupportAgent")
+```
+
+## How to Write a Custom Node
+
+To create a custom node, you inherit from `Node` (or `OutputAgentNode`) and override the `process_event` method.
+
+> [!WARNING]
+> **Manual Event Propagation**
+> In a custom `Node`, the chain of events stops with you unless you explicitly move it forward. You **MUST** call `await self.send_event(...)` if you want the event to continue causing effects in the graph. If you don't send an event, the execution path ends at your node.
+
+### Example: A Custom Logger Node
+
+```python
+class LoggerNode(Node):
+    async def process_event(self, event):
+        # 1. Do your work
+        print(f"LOG: Received event type {event.type}")
+        
+        # 2. Pass it along (if needed)
+        # If you don't do this, the next node in the graph won't hear about it!
+        await self.send_event(event) 
+```

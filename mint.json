@@ -31,7 +31,6 @@
                     "pages": [
                         "core-concepts/graph",
                         "core-concepts/nodes",
-                        "core-concepts/agents",
                         "core-concepts/events",
                         "core-concepts/session"
                     ]
@@ -50,9 +49,7 @@
             "pages": [
                 "patterns/orchestration",
                 "patterns/tools",
-                "patterns/memory",
-                "patterns/custom-events",
-                "patterns/knowledge-base"
+                "patterns/custom-events"
             ]
         }
     ]
