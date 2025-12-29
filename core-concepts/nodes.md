@@ -1,28 +1,48 @@
 ---
 title: "Nodes"
-description: "The building blocks of the Atoms graph."
+description: "The fundamental units of processing in an Atoms graph."
 ---
 
-## What is a Node?
+A **Node** is a stateful entity that processes events. It is the base class for everything in your agent graph, including Agents.
 
-A **Node** is a stateful event processor that can have parents and children, forming a directed graph. In the Atoms SDK, everything that processes an event is a Node.
+## Capabilities
 
-### Key Characteristics
+All nodes share a common set of capabilities:
 
-*   **Unique Name**: Every node has a distinct identifier within the graph.
-*   **Event Queue**: Nodes maintain their own queue of incoming events to process.
-*   **Asynchronous**: Event processing happens non-blockingly.
-*   **Topology**: Nodes can be connected to multiple parents and multiple children.
+<CardGroup cols={2}>
+    <Card title="Event Queue" icon="layer-group">
+        Each node has its own async queue for processing events sequentially.
+    </Card>
+    <Card title="State Management" icon="database">
+        Nodes can maintain state across the lifetime of a session.
+    </Card>
+    <Card title="Context" icon="book-open">
+        Access to shared session context and history.
+    </Card>
+    <Card title="Relationships" icon="share-nodes">
+        Nodes know their parents and children in the DAG.
+    </Card>
+</CardGroup>
 
-### In Code
+## The Node Interface
 
-All nodes inherit from the base `Node` class found in `smallestai.atoms.agent.nodes.base`.
+Every node implements the `BaseNode` interface.
 
 ```python
-from smallestai.atoms.agent.nodes.base import Node
-
-class MyCustomNode(Node):
+class Node:
     async def process_event(self, event: SDKEvent):
-        # specific logic here
-        await super().process_event(event)
+        """Process an incoming event."""
+        pass
+
+    async def send_event(self, event: SDKEvent):
+        """Send an event to children nodes."""
+        pass
 ```
+
+
+## Lifecycle
+
+1.  **Initialization**: Node is created and configured.
+2.  **Registration**: Node is added to a `Session`.
+3.  **Processing**: Node receives events via `process_event`.
+4.  **Teardown**: Session ends, node cleans up resources.

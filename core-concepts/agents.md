@@ -1,29 +1,40 @@
 ---
 title: "Agents"
-description: "Specialized nodes for intelligent behavior."
+description: "LLM-powered nodes that drive the conversation."
 ---
 
-## Agents
+**Agents** are specialized Nodes that integrate with Large Language Models (LLMs). They extend the capabilities of a standard Node to include prompt management, tool execution, and response streaming.
 
-An **Agent** is a specialized Node that typically uses a Large Language Model (LLM) to process input and generate output.
+## Types of Agents
 
-### OutputAgentNode
+<Tabs>
+  <Tab title="OutputAgentNode">
+    **User-Facing**
+    Designed to communicate directly with the end user. It streams tokens back to the client as they are generated.
+    
+    *Use case: The primary conversational persona.*
+  </Tab>
+  <Tab title="BackgroundAgentNode">
+    **Internal**
+    Runs silently in the background. It processes data or makes decisions without sending text directly to the user.
+    
+    *Use case: Intent classification, sentiment analysis, data extraction.*
+  </Tab>
+</Tabs>
 
-Use `OutputAgentNode` when you want to generate responses that are sent back to the user (e.g., text, speech).
+## Creating an Agent
 
-*   **Interruptible**: Automatically handles interruption events (e.g., user starts talking while agent is speaking).
-*   **Streaming**: Emits `ResponseStart`, `ResponseChunk`, and `ResponseEnd` events standardizing the streaming lifecycle.
+To create an agent, inherit from `OutputAgentNode` or `BackgroundAgentNode` and implement `generate_response`.
 
 ```python
 from smallestai.atoms.agent.nodes import OutputAgentNode
 
-class MyVoiceAgent(OutputAgentNode):
-    # ... implementation ...
+class SalesAgent(OutputAgentNode):
+    async def generate_response(self):
+        # Your logic here to call LLM
+        pass
 ```
 
-### BackgroundAgentNode
+## Tools
 
-Use `BackgroundAgentNode` for silent processing, such as:
-*   Enriching context (e.g., looking up user data).
-*   Analyzing sentiment.
-*   Making routing decisions without speaking.
+Agents can be equipped with tools to perform actions. See the [Tool Usage](/patterns/tools) pattern for details on how to register functions as tools.

@@ -1,22 +1,44 @@
 ---
-title: "Introduction"
-description: "Build intelligent, multi-agent systems with real-time communication."
+title: "What is Atoms SDK?"
+description: "Build intelligent, multi-agent systems with fine-grained control."
 ---
-
-# What is Atoms SDK?
 
 Atoms SDK enables developers to build conversational AI systems by composing specialized agents in a graph structure. Each agent processes events, communicates with LLMs, and can interact with other agents to create sophisticated workflows.
 
-It is designed for teams that:
+<CardGroup cols={2}>
+  <Card title="Fine-grained Control" icon="sliders">
+    Manage agent behavior, routing, and tool execution with precision.
+  </Card>
+  <Card title="Low Latency" icon="bolt">
+    Built for streaming environments like telephony and real-time web calls.
+  </Card>
+  <Card title="Graph-based" icon="circle-nodes">
+    Compose agents into directed graphs for complex workflows.
+  </Card>
+  <Card title="Code-first" icon="code">
+    Keep reasoning logic in code while offloading orchestration.
+  </Card>
+</CardGroup>
 
-*   Need fine-grained control over agent behavior, routing, and tools.
-*   Operate in low-latency streaming environments (telephony, web calls, chat widgets).
-*   Prefer to keep reasoning and application logic in code, while delegating session orchestration to a runtime.
+## Designed for Scale
 
-## Core Philosophy
+Atoms is built for teams that need to go beyond simple chatbots. Whether you are building valid customer support agents, sales bots, or complex internal tools, Atoms provides the primitives you need.
 
-Atoms SDK is built around the idea of **Agents as Nodes in a Graph**. Instead of a single monolithic agent, you compose clear, single-purpose agents (nodes) that pass messages (events) to each other.
+### Key Capabilities
+- **Event-driven**: Everything is an event, from user messages to internal signals.
+- **Stateful Nodes**: Maintain context across long-running sessions.
+- **Flexible Routing**: Direct traffic between agents dynamically.
 
-*   **Modular**: Swap out an agent implementation without breaking the rest of the system.
-*   **Stateful**: Sessions manage the varying state of a conversation.
-*   **Event-Driven**: Everything is an event, from user speech to system errors.
+## Architecture
+
+At the high level, an Atoms application consists of a **Session** that manages a **Graph** of **Nodes**. Events flow through this graph, triggering **Agents** to generate responses or take actions.
+
+```mermaid
+graph TD;
+    User-->Session;
+    Session-->RouterNode;
+    RouterNode-->SalesAgent;
+    RouterNode-->SupportAgent;
+    SalesAgent-->Response;
+    SupportAgent-->Response;
+```

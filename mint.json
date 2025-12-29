@@ -20,16 +20,9 @@
         "name": "Dashboard",
         "url": "https://dashboard.smallest.ai"
     },
-    "anchors": [
-        {
-            "name": "Documentation",
-            "icon": "book-open-cover",
-            "url": "introduction"
-        }
-    ],
     "navigation": [
         {
-            "group": "Get Started",
+            "group": "Overview",
             "pages": [
                 "introduction",
                 "getting-started"
@@ -40,7 +33,26 @@
             "pages": [
                 "core-concepts/nodes",
                 "core-concepts/agents",
-                "core-concepts/events"
+                "core-concepts/events",
+                "core-concepts/session",
+                "core-concepts/graph"
+            ]
+        },
+        {
+            "group": "Patterns",
+            "pages": [
+                "patterns/tools",
+                "patterns/orchestration",
+                "patterns/memory",
+                "patterns/custom-events",
+                "patterns/knowledge-base"
+            ]
+        },
+        {
+            "group": "CLI",
+            "pages": [
+                "cli/overview",
+                "cli/commands"
             ]
         }
     ]
