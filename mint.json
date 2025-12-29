@@ -1,8 +1,8 @@
 {
     "name": "Atoms SDK",
     "logo": {
-        "light": "/images/logo_light.png",
-        "dark": "/images/logo_dark.png"
+        "light": "/images/logo_dark.png",
+        "dark": "/images/logo_light.png"
     },
     "favicon": "/images/favi.svg",
     "colors": {
