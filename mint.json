@@ -25,17 +25,17 @@
             "group": "Introduction",
             "pages": [
                 "introduction",
-                "getting-started"
-            ]
-        },
-        {
-            "group": "Core Concepts",
-            "pages": [
-                "core-concepts/graph",
-                "core-concepts/nodes",
-                "core-concepts/agents",
-                "core-concepts/events",
-                "core-concepts/session"
+                "getting-started",
+                {
+                    "group": "Core Concepts",
+                    "pages": [
+                        "core-concepts/graph",
+                        "core-concepts/nodes",
+                        "core-concepts/agents",
+                        "core-concepts/events",
+                        "core-concepts/session"
+                    ]
+                }
             ]
         },
         {
