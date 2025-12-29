@@ -5,11 +5,6 @@ description: "The lifeblood of an Atoms application."
 
 **Events** are typed objects that flow through the graph. They represent everything that happens in the system, from a user saying "Hello" to an agent deciding to call a function.
 
-<Note>
-  See the full event definitions in the [source code](https://github.com/smallest-inc/smallest-python-sdk/blob/main/smallestai/atoms/agent/events.py).
-</Note>
-
-
 ## Structure
 
 ## Structure
@@ -35,7 +30,12 @@ class SDKEvent(TypedModel):
 | `SDKSystemUserJoinedEvent` | Triggered when a client connects. |
 | `SDKAgentEndCallEvent` | Signal to end the session. |
 
-> [See all available events in the source code](https://github.com/smallest-inc/smallest-python-sdk/blob/main/smallestai/atoms/agent/events.py).
+| `SDKAgentEndCallEvent` | Signal to end the session. |
+
+<Info>
+  See the full event definitions in the [source code](https://github.com/smallest-inc/smallest-python-sdk/blob/main/smallestai/atoms/agent/events.py).
+</Info>
+
 
 
 ## Flow
