@@ -19,8 +19,8 @@ In Atoms, an "agent" is not a single monolithic entity but a **directed acyclic 
   <Card title="Event Highway" icon="truck-fast">
     The graph serves as the propagation channel for all system and user events.
   </Card>
-  <Card title="Abstracted Root" icon="seedling">
-    No need to define a "root" or "leaf". The framework handles entry and exit points.
+  <Card title="Platform Managed" icon="seedling">
+    The framework handles entry points, traversal, and lifecycle management automatically.
   </Card>
 </CardGroup>
 

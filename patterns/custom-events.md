@@ -3,11 +3,31 @@ title: "Custom Events"
 description: "Signaling between agents with specific events."
 ---
 
-You can define custom events to handle internal signaling between nodes.
+While standard system events handle core mechanics like text and audio, you often need to signal custom business logic states—like "PaymentFailed" or "EscalationRequired".
 
-## Defining a Custom Event
+<Info>
+  **Why Custom Events?**
+  Unlike passing untyped dictionaries, defining `SDKEvent` subclasses gives you **type safety**, **validation**, and **clearer intent** in your code.
+</Info>
 
-Inherit from `SDKEvent` and specify a unique `type`.
+## The Event Lifecycle
+
+<CardGroup cols={3}>
+  <Card title="Define" icon="pen-to-square">
+    Create a class inheriting from `SDKEvent`.
+  </Card>
+  <Card title="Emit" icon="tower-broadcast">
+    Broadcast it from any node using `send_event`.
+  </Card>
+  <Card title="Handle" icon="hand">
+    Catch it in a downstream node's `process_event`.
+  </Card>
+</CardGroup>
+
+## Implementation
+
+### 1. Defining the Event
+Inherit from `SDKEvent` and specify a unique `type` string. This string is used for serialization.
 
 ```python
 from smallestai.atoms.agent.events import SDKEvent
@@ -19,8 +39,7 @@ class EscalationEvent(SDKEvent, type="escalation_event"):
     severity: Optional[str] = "medium"
 ```
 
-## Emitting Events
-
+### 2. Emitting the Event
 Use `self.send_event()` to broadcast the event to downstream nodes.
 
 ```python
@@ -34,9 +53,8 @@ class SupportBot(OutputAgentNode):
             ))
 ```
 
-## Handling Events
-
-Override `process_event` to listen for your custom type.
+### 3. Handling the Event
+Override `process_event` to listen for your custom type. Using `isinstance` allows for clean, pythonic logic.
 
 ```python
 class SupervisorNode(BaseNode):
