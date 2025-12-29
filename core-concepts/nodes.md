@@ -41,10 +41,16 @@ from smallestai.atoms import OutputAgentNode
 
 class MyAgent(OutputAgentNode):
     def __init__(self):
-        super().__init__(
-            model="gpt-4o",
-            system_prompt="You are a helpful assistant."
-        )
+        super().__init__(name="my_agent")
+        # Initialize your own LLM client
+        self.llm = OpenAIClient(api_key="...")
+
+    async def generate_response(self, messages):
+        # 1. Call your LLM
+        # 2. Yield text chunks (the framework handles buffering and events)
+        async for chunk in self.llm.chat(messages, stream=True):
+            if chunk.content:
+                yield chunk.content
 ```
 
 ### 2. The Base Node (`Node`)
@@ -63,11 +69,11 @@ from smallestai.atoms.agent.nodes import Node
 class RouterNode(Node):
     async def process_event(self, event):
         # Deterministic logic
-        if "sales" in event.content:
-             # Manually send event to the next node
-            await self.send_event(event, destination="SalesAgent")
+         if "sales" in event.content:
+             # Broadcast to children (routing logic handles filtering)
+            await self.send_event(event)
         else:
-            await self.send_event(event, destination="SupportAgent")
+            await self.send_event(event)
 ```
 
 ## How to Write a Custom Node

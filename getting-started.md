@@ -43,19 +43,20 @@ We will create a simple "Echo Agent" that uses OpenAI to generate responses.
     This file sets up the session and runs the server.
 
     ```python server.py
-    from smallestai.atoms.agent.server import AtomsApp
+    from smallestai.atoms.server import AtomsServer
     from smallestai.atoms.agent.session import AgentSession
     from my_agent import MyAgent
 
-    async def setup(session: AgentSession):
+    async def on_start(session: AgentSession):
         # Add our agent to the session
         session.add_node(MyAgent())
         # Start the processing loop
         await session.start()
 
     if __name__ == "__main__":
-        app = AtomsApp(setup_handler=setup)
-        app.run(port=8080)
+        # Create and start the server
+        server = AtomsServer(on_session_start=on_start)
+        server.start()
     ```
   </Step>
 </Steps>
@@ -73,7 +74,7 @@ Before you can chat, you must link your code to an Atoms agent and make it live 
   </Step>
 
   <Step title="Deploy">
-    Upload your agent code.
+    Deploy the agent to atoms infra.
     ```bash
     smallestai agent deploy
     ```

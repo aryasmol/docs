@@ -17,10 +17,7 @@ While standard system events handle core mechanics like text and audio, you ofte
     Inherit from `SDKEvent` and specify a unique `type` string. This string is used for serialization.
 
     ```python
-    from smallestai.atoms.agent.events import SDKEvent
-    from typing import Optional
-    
-    # Define the event with a unique type string
+    # 1. Define the Event
     class EscalationEvent(SDKEvent, type="escalation_event"):
         reason: str
         severity: Optional[str] = "medium"
@@ -32,7 +29,8 @@ While standard system events handle core mechanics like text and audio, you ofte
 
     ```python
     class SupportBot(OutputAgentNode):
-        async def generate_response(self):
+        async def generate_response(self, messages):
+            # ... analysis logic ...
             if "angry" in user_sentiment:
                 # Emit the custom event
                 await self.send_event(EscalationEvent(
@@ -43,18 +41,18 @@ While standard system events handle core mechanics like text and audio, you ofte
   </Step>
 
   <Step title="Handle the Event">
-    Override `process_event` to listen for your custom type. Using `isinstance` allows for clean, pythonic logic.
+    Override `process_event` to listen for your custom type.
 
     ```python
-    class SupervisorNode(BaseNode):
+    class SupervisorNode(Node):
         async def process_event(self, event: SDKEvent):
             # Check for your custom event type
             if isinstance(event, EscalationEvent):
                 print(f"Escalation received: {event.reason}")
                 # Take action...
-            else:
-                # Important: Pass through other events!
-                await super().process_event(event)
+            
+            # Important: Propagate event to children!
+            await self.send_event(event)
     ```
   </Step>
 </Steps>
