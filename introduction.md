@@ -3,7 +3,7 @@ title: "What is Atoms SDK?"
 description: "Build intelligent, multi-agent systems with fine-grained control."
 ---
 
-Atoms SDK enables developers to build conversational AI systems by composing specialized agents in a graph structure. Beyond building agents, the SDK also provides a robust **Platform API** to programmatically manage your agents, campaigns, and observability.
+Atoms SDK enables developers to build conversational AI systems by composing specialized agents in a graph structure.
 
 <CardGroup cols={2}>
   <Card title="Fine-grained Control" icon="sliders">
@@ -41,9 +41,7 @@ Whether you are building valid customer support agents, sales bots, or complex i
   <Card title="CLI Reference" icon="terminal" href="/cli/overview">
     Master the command line tools.
   </Card>
-  <Card title="Platform API" icon="cloud" href="/platform-api/overview">
-    Manage resources programmatically.
-  </Card>
+
   <Card title="Patterns" icon="layer-group" href="/patterns/orchestration">
     Explore common architectural patterns.
   </Card>
