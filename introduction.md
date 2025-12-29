@@ -20,25 +20,23 @@ Atoms SDK enables developers to build conversational AI systems by composing spe
   </Card>
 </CardGroup>
 
-## Designed for Scale
+## Why Atoms?
 
-Atoms is built for teams that need to go beyond simple chatbots. Whether you are building valid customer support agents, sales bots, or complex internal tools, Atoms provides the primitives you need.
+Atoms addresses the complexity of modern AI applications by providing a structured, event-driven framework.
+
+### Designed for Scale
+Whether you are building valid customer support agents, sales bots, or complex internal tools, Atoms provides the primitives you need to scale from a single prompt to a thousand concurrent sessions.
 
 ### Key Capabilities
-- **Event-driven**: Everything is an event, from user messages to internal signals.
-- **Stateful Nodes**: Maintain context across long-running sessions.
-- **Flexible Routing**: Direct traffic between agents dynamically.
+- **Event-driven**: Unified event model for user messages, system signals, and tool outputs.
+- **Stateful Nodes**: Persistent context management across long-running sessions.
+- **Flexible Routing**: Dynamic traffic control between specialized agents.
 
-## Architecture
+## Get Started in Seconds
 
-At the high level, an Atoms application consists of a **Session** that manages a **Graph** of **Nodes**. Events flow through this graph, triggering **Agents** to generate responses or take actions.
+Spin up a new project with a single command:
 
-```mermaid
-graph TD;
-    User-->Session;
-    Session-->RouterNode;
-    RouterNode-->SalesAgent;
-    RouterNode-->SupportAgent;
-    SalesAgent-->Response;
-    SupportAgent-->Response;
+```bash
+pip install smallestai
+smallestai agent init
 ```
