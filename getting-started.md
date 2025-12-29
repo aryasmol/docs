@@ -43,7 +43,7 @@ We will create a simple "Echo Agent" that uses OpenAI to generate responses.
     This file sets up the session and runs the server.
 
     ```python server.py
-    from smallestai.atoms.server import AtomsServer
+    from smallestai.atoms.agent.server import AtomsApp
     from smallestai.atoms.agent.session import AgentSession
     from my_agent import MyAgent
 
@@ -54,9 +54,9 @@ We will create a simple "Echo Agent" that uses OpenAI to generate responses.
         await session.start()
 
     if __name__ == "__main__":
-        # Create and start the server
-        server = AtomsServer(on_session_start=on_start)
-        server.start()
+        # Create and run the server
+        app = AtomsApp(setup_handler=on_start)
+        app.run(port=8080)
     ```
   </Step>
 </Steps>
