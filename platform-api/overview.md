@@ -36,14 +36,19 @@ client.get_knowledge_bases()
 client.get_conversation_logs(id="call_id")
 ```
 
-## Available APIs
+## Explore the APIS
 
-*   [Agents](/platform-api/agents): Manage agent configurations and templates.
-*   [Calls](/platform-api/calls): Retrieve call history and transcripts.
-*   [Campaigns](/platform-api/campaigns): Create and manage outbound calling campaigns.
-*   [Knowledge Base](/patterns/knowledge-base): Manage RAG knowledge bases.
-*   [Logs](/platform-api/logs): Access detailed conversation logs.
-*   [Organization](/platform-api/organization): View organization details.
-*   [User](/platform-api/user): View authenticated user details.
-*   [Campaigns](/platform-api/campaigns): Create and manage outbound campaigns.
-*   [Logs](/platform-api/logs): Access system logs for debugging.
+<CardGroup cols={2}>
+  <Card title="Agents" icon="robot" href="/platform-api/agents">
+    Create and manage AI agents.
+  </Card>
+  <Card title="Campaigns" icon="bullhorn" href="/platform-api/campaigns">
+    Run outbound calling campaigns.
+  </Card>
+   <Card title="Calls" icon="phone" href="/platform-api/calls">
+    Access call history and transcripts.
+  </Card>
+  <Card title="Logs" icon="list" href="/platform-api/logs">
+    Debug with conversation logs.
+  </Card>
+</CardGroup>

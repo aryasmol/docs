@@ -1,10 +1,10 @@
 {
     "name": "Atoms SDK",
     "logo": {
-        "light": "/logo/light.svg",
-        "dark": "/logo/dark.svg"
+        "light": "/images/logo_light.png",
+        "dark": "/images/logo_dark.png"
     },
-    "favicon": "/favicon.png",
+    "favicon": "/images/favi.svg",
     "colors": {
         "primary": "#0F52FF",
         "light": "#80A6FF",
@@ -17,8 +17,8 @@
         }
     ],
     "topbarCtaButton": {
-        "name": "Dashboard",
-        "url": "https://dashboard.smallest.ai"
+        "name": "Smallest AI Home",
+        "url": "https://smallest.ai"
     },
     "navigation": [
         {

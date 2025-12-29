@@ -32,11 +32,19 @@ Whether you are building valid customer support agents, sales bots, or complex i
 - **Stateful Nodes**: Persistent context management across long-running sessions.
 - **Flexible Routing**: Dynamic traffic control between specialized agents.
 
-## Get Started in Seconds
+## What Next?
 
-Spin up a new project with a single command:
-
-```bash
-pip install smallestai
-smallestai agent init
-```
+<CardGroup cols={2}>
+  <Card title="Get Started" icon="play" href="/getting-started">
+    Build your first agent in under 5 minutes.
+  </Card>
+  <Card title="CLI Reference" icon="terminal" href="/cli/overview">
+    Master the command line tools.
+  </Card>
+  <Card title="Platform API" icon="cloud" href="/platform-api/overview">
+    Manage resources programmatically.
+  </Card>
+  <Card title="Patterns" icon="layer-group" href="/patterns/orchestration">
+    Explore common architectural patterns.
+  </Card>
+</CardGroup>
