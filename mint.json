@@ -22,7 +22,7 @@
     },
     "navigation": [
         {
-            "group": "Overview",
+            "group": "Introduction",
             "pages": [
                 "introduction",
                 "getting-started"
@@ -31,21 +31,11 @@
         {
             "group": "Core Concepts",
             "pages": [
+                "core-concepts/graph",
                 "core-concepts/nodes",
                 "core-concepts/agents",
                 "core-concepts/events",
-                "core-concepts/session",
-                "core-concepts/graph"
-            ]
-        },
-        {
-            "group": "Patterns",
-            "pages": [
-                "patterns/tools",
-                "patterns/orchestration",
-                "patterns/memory",
-                "patterns/custom-events",
-                "patterns/knowledge-base"
+                "core-concepts/session"
             ]
         },
         {
@@ -53,6 +43,28 @@
             "pages": [
                 "cli/overview",
                 "cli/commands"
+            ]
+        },
+        {
+            "group": "Platform API",
+            "pages": [
+                "platform-api/overview",
+                "platform-api/agents",
+                "platform-api/calls",
+                "platform-api/campaigns",
+                "platform-api/logs",
+                "platform-api/organization",
+                "platform-api/user"
+            ]
+        },
+        {
+            "group": "Patterns",
+            "pages": [
+                "patterns/orchestration",
+                "patterns/tools",
+                "patterns/memory",
+                "patterns/custom-events",
+                "patterns/knowledge-base"
             ]
         }
     ]

@@ -18,13 +18,13 @@ pip install smallestai
 To verify your installation, run:
 
 ```bash
-python -m smallestai.cli.main --help
+smallestai --help
 ```
 
 You should see an output similar to this:
 
 ```text Terminal Output
-Usage: python -m smallestai.cli.main [OPTIONS] COMMAND [ARGS]...
+Usage: smallestai [OPTIONS] COMMAND [ARGS]...
 
   SmallestAI CLI
 
