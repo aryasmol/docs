@@ -81,19 +81,19 @@ Deployments are **not live** by default. To serve traffic, you must explicitly p
 
 ![SDK Live Indicator](/images/sdk-live.png)
 
-### Taking Down (`Unlive`)
+### Taking Down (`Take Down`)
 
 If you need to stop serving traffic entirely (e.g., for maintenance or emergency), you can take down the live build.
 
 1.  Run `smallestai agent builds`.
 2.  Select the currently **LIVE** build (marked with green).
-3.  Choose **Make Unlive**.
+3.  Choose **Take Down**.
 
 ```text Terminal Output
 ? Select a build to manage:
  > bld_xyz789 | SUCCEEDED | LIVE | 2024-01-01 12:00:00
 
 ? What would you like to do with build bld_xyz789...?
- > Make Unlive
+ > Take Down
    Cancel
 ```
