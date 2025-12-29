@@ -1,0 +1,47 @@
+{
+    "name": "Atoms SDK",
+    "logo": {
+        "light": "/logo/light.svg",
+        "dark": "/logo/dark.svg"
+    },
+    "favicon": "/favicon.png",
+    "colors": {
+        "primary": "#0F52FF",
+        "light": "#80A6FF",
+        "dark": "#051A4D"
+    },
+    "topbarLinks": [
+        {
+            "name": "Support",
+            "url": "mailto:support@smallest.ai"
+        }
+    ],
+    "topbarCtaButton": {
+        "name": "Dashboard",
+        "url": "https://dashboard.smallest.ai"
+    },
+    "anchors": [
+        {
+            "name": "Documentation",
+            "icon": "book-open-cover",
+            "url": "introduction"
+        }
+    ],
+    "navigation": [
+        {
+            "group": "Get Started",
+            "pages": [
+                "introduction",
+                "getting-started"
+            ]
+        },
+        {
+            "group": "Core Concepts",
+            "pages": [
+                "core-concepts/nodes",
+                "core-concepts/agents",
+                "core-concepts/events"
+            ]
+        }
+    ]
+}
