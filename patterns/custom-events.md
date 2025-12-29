@@ -10,48 +10,51 @@ While standard system events handle core mechanics like text and audio, you ofte
   Unlike passing untyped dictionaries, defining `SDKEvent` subclasses gives you **type safety**, **validation**, and **clearer intent** in your code.
 </Info>
 
-
-
 ## Implementation
 
-### 1. Defining the Event
-Inherit from `SDKEvent` and specify a unique `type` string. This string is used for serialization.
+<Steps>
+  <Step title="Define the Event">
+    Inherit from `SDKEvent` and specify a unique `type` string. This string is used for serialization.
 
-```python
-from smallestai.atoms.agent.events import SDKEvent
-from typing import Optional
+    ```python
+    from smallestai.atoms.agent.events import SDKEvent
+    from typing import Optional
+    
+    # Define the event with a unique type string
+    class EscalationEvent(SDKEvent, type="escalation_event"):
+        reason: str
+        severity: Optional[str] = "medium"
+    ```
+  </Step>
 
-# Define the event with a unique type string
-class EscalationEvent(SDKEvent, type="escalation_event"):
-    reason: str
-    severity: Optional[str] = "medium"
-```
+  <Step title="Emit the Event">
+    Use `self.send_event()` to broadcast the event to downstream nodes.
 
-### 2. Emitting the Event
-Use `self.send_event()` to broadcast the event to downstream nodes.
+    ```python
+    class SupportBot(OutputAgentNode):
+        async def generate_response(self):
+            if "angry" in user_sentiment:
+                # Emit the custom event
+                await self.send_event(EscalationEvent(
+                    reason="User is frustrated",
+                    severity="high"
+                ))
+    ```
+  </Step>
 
-```python
-class SupportBot(OutputAgentNode):
-    async def generate_response(self):
-        if "angry" in user_sentiment:
-            # Emit the custom event
-            await self.send_event(EscalationEvent(
-                reason="User is frustrated",
-                severity="high"
-            ))
-```
+  <Step title="Handle the Event">
+    Override `process_event` to listen for your custom type. Using `isinstance` allows for clean, pythonic logic.
 
-### 3. Handling the Event
-Override `process_event` to listen for your custom type. Using `isinstance` allows for clean, pythonic logic.
-
-```python
-class SupervisorNode(BaseNode):
-    async def process_event(self, event: SDKEvent):
-        # Check for your custom event type
-        if isinstance(event, EscalationEvent):
-            print(f"Escalation received: {event.reason}")
-            # Take action...
-        else:
-            # Important: Pass through other events!
-            await super().process_event(event)
-```
+    ```python
+    class SupervisorNode(BaseNode):
+        async def process_event(self, event: SDKEvent):
+            # Check for your custom event type
+            if isinstance(event, EscalationEvent):
+                print(f"Escalation received: {event.reason}")
+                # Take action...
+            else:
+                # Important: Pass through other events!
+                await super().process_event(event)
+    ```
+  </Step>
+</Steps>
