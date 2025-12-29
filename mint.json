@@ -30,8 +30,8 @@
                     "group": "Core Concepts",
                     "pages": [
                         "core-concepts/nodes",
-                        "core-concepts/graph",
                         "core-concepts/events",
+                        "core-concepts/graph",
                         "core-concepts/session"
                     ]
                 }
