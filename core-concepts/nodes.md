@@ -7,10 +7,19 @@ A **Node** is the basic unit of computation in the Atoms graph. Every "agent" or
 
 ## What is a Node?
 
-In the conceptual graph, a Node is a vertex that:
-1.  **Receives Events**: Accepts incoming signals (like user audio, text, or system triggers).
-2.  **Processes Logic**: Executes your custom Python code, business rules, or AI inference.
-3.  **Sends Events**: Manually emits new events to passing control or data to other parts of the graph.
+In the conceptual graph, a Node is a vertex that performs three key actions:
+
+<CardGroup cols={3}>
+  <Card title="Receives" icon="inbox">
+    Accepts incoming events like user audio, text, or system triggers.
+  </Card>
+  <Card title="Processes" icon="microchip">
+    Executes custom Python code, business logic, or AI inference.
+  </Card>
+  <Card title="Sends" icon="paper-plane">
+    Manually emits new events to pass control to the rest of the graph.
+  </Card>
+</CardGroup>
 
 ## Two Types of Nodes
 
@@ -63,21 +72,29 @@ class RouterNode(Node):
 
 ## How to Write a Custom Node
 
-To create a custom node, you inherit from `Node` (or `OutputAgentNode`) and override the `process_event` method.
-
-> [!WARNING]
-> **Manual Event Propagation**
-> In a custom `Node`, the chain of events stops with you unless you explicitly move it forward. You **MUST** call `await self.send_event(...)` if you want the event to continue causing effects in the graph. If you don't send an event, the execution path ends at your node.
-
-### Example: A Custom Logger Node
-
-```python
-class LoggerNode(Node):
+<Steps>
+  <Step title="Inherit from Node">
+    Create a new class that inherits from `Node` (or `OutputAgentNode`).
+    ```python
+    class LoggerNode(Node):
+    ```
+  </Step>
+  <Step title="Override process_event">
+    Implement the `process_event` async method. This is your logic handler.
+    ```python
     async def process_event(self, event):
-        # 1. Do your work
         print(f"LOG: Received event type {event.type}")
-        
-        # 2. Pass it along (if needed)
-        # If you don't do this, the next node in the graph won't hear about it!
-        await self.send_event(event) 
-```
+    ```
+  </Step>
+  <Step title="Propagate Events">
+    **Crucial:** You must manually send events if you want the flow to continue.
+    ```python
+    await self.send_event(event) 
+    ```
+  </Step>
+</Steps>
+
+<Warning>
+  **Manual Event Propagation**
+  In a custom `Node`, the chain of events stops with you unless you explicitly move it forward. You **MUST** call `await self.send_event(...)` if you want the event to continue causing effects in the graph.
+</Warning>

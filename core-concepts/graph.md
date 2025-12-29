@@ -5,28 +5,36 @@ description: "Understanding the structural foundation of Atoms agents."
 
 In Atoms, an "agent" is not a single monolithic entity but a **directed acyclic graph (DAG)** of **Nodes**. This graph structure allows you to decompose complex conversational logic into smaller, manageable, and reusable components.
 
-## Conceptual Model
-
-Think of the Graph as the map of your conversation.
-
-*   **Nodes**: The destinations. Each node represents a specific unit of logic or behavior (e.g., "Welcome User", "Collect Payment", "Process Order").
-*   **Edges**: The roads. They define the possible transitions between nodes.
-
-When the system runs, the `AgentSession` navigates this graph, moving from node to node based on events and the logic defined within each node.
+<Info>
+  **Conceptual Model**
+  Think of the Graph as the map of your conversation. **Nodes** are the destinations (logic) and **Edges** are the roads (transitions). The session navigates this map based on events.
+</Info>
 
 ## Key Properties
 
-### 1. Directed & Acyclic
-The flow of events and control moves in a specific direction. While you can loop back to previous logical states by revisiting nodes, the structural definition should prevent infinite recursive cycles that trap the execution flow.
+<CardGroup cols={3}>
+  <Card title="Directed Flow" icon="arrow-right">
+    Events and control move in a specific direction through the graph.
+  </Card>
+  <Card title="Event Highway" icon="truck-fast">
+    The graph serves as the propagation channel for all system and user events.
+  </Card>
+  <Card title="Abstracted Root" icon="seedling">
+    No need to define a "root" or "leaf". The framework handles entry and exit points.
+  </Card>
+</CardGroup>
 
-### 2. Event Propagation
-The graph is the highway for **events**. When a node emits an event (like a user message or a tool output), it travels through the graph.
-*   Nodes **receive** events from the system or upstream nodes.
-*   Nodes **process** these events.
-*   Nodes **emit** new events to downstream nodes or back to the system.
+<Warning>
+  **No Cycles Allowed**
+  While you can revisit nodes logically, your graph structure must not contain infinite recursive cycles. The system enforces a DAG structure to prevent execution traps.
+</Warning>
 
-### 3. Abstraction
-You don't need to worry about defining a "root" or "leaf" node explicitly. The Atoms framework handles the entry point and traversal mechanics. You simply define your nodes and how they connect to each other.
+## Event Propagation
+
+When a node emits an event (like a user message or a tool output), it travels through the graph:
+1.  Nodes **receive** events from the system or upstream nodes.
+2.  Nodes **process** these events.
+3.  Nodes **emit** new events to downstream nodes or back to the system.
 
 ## Visualizing the Graph
 
