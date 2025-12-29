@@ -7,8 +7,6 @@ description: "The lifeblood of an Atoms application."
 
 ## Structure
 
-## Structure
-
 All events inherit from `SDKEvent`, which is a Pydantic model (`TypedModel`). This ensures type safety and easy serialization.
 
 ```python
@@ -30,7 +28,7 @@ class SDKEvent(TypedModel):
 | `SDKSystemUserJoinedEvent` | Triggered when a client connects. |
 | `SDKAgentEndCallEvent` | Signal to end the session. |
 
-| `SDKAgentEndCallEvent` | Signal to end the session. |
+
 
 <Info>
   See the full event definitions in the [source code](https://github.com/smallest-inc/smallest-python-sdk/blob/main/smallestai/atoms/agent/events.py).
