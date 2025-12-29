@@ -1,5 +1,5 @@
 ---
-title: "Multi-Agent Patterns"
+title: "Multi-Agent"
 description: "Architectural recipes for connecting multiple agents."
 ---
 

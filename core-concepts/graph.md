@@ -36,18 +36,7 @@ When a node emits an event (like a user message or a tool output), it travels th
 2.  Nodes **process** these events.
 3.  Nodes **emit** new events to downstream nodes or back to the system.
 
-## Visualizing the Graph
 
-```mermaid
-graph TD
-    A[Inbound Call] --> B[Welcome Node]
-    B --> C{User Intent?}
-    C -->|Sales| D[Sales Agent]
-    C -->|Support| E[Support Agent]
-    D --> F[Close Ticket]
-    E --> F
-    F --> G[End Call]
-```
 
 By organizing your agent as a graph, you gain:
 *   **Modularity**: Update the "Sales Agent" without breaking the "Support Agent".
