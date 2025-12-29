@@ -1,5 +1,5 @@
 ---
-title: "The Graph"
+title: "Graph"
 description: "Understanding the structural foundation of Atoms agents."
 ---
 

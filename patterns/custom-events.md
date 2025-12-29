@@ -10,19 +10,7 @@ While standard system events handle core mechanics like text and audio, you ofte
   Unlike passing untyped dictionaries, defining `SDKEvent` subclasses gives you **type safety**, **validation**, and **clearer intent** in your code.
 </Info>
 
-## The Event Lifecycle
 
-<CardGroup cols={3}>
-  <Card title="Define" icon="pen-to-square">
-    Create a class inheriting from `SDKEvent`.
-  </Card>
-  <Card title="Emit" icon="tower-broadcast">
-    Broadcast it from any node using `send_event`.
-  </Card>
-  <Card title="Handle" icon="hand">
-    Catch it in a downstream node's `process_event`.
-  </Card>
-</CardGroup>
 
 ## Implementation
 
