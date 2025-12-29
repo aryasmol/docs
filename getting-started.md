@@ -52,11 +52,14 @@ We will create a simple "Echo Agent" that uses OpenAI to generate responses.
         session.add_node(MyAgent())
         # Start the processing loop
         await session.start()
+        
+        # Wait for the session to finish
+        await session.wait_until_complete()
 
     if __name__ == "__main__":
         # Create and run the server
         app = AtomsApp(setup_handler=on_start)
-        app.run(port=8080)
+        app.run()
     ```
   </Step>
 </Steps>

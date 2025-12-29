@@ -22,17 +22,25 @@ The **Session** (`AgentSession`) interacts with the outside world (the transport
 ## Example Usage
 
 ```python
+from smallestai.atoms.agent.server import AtomsApp
 from smallestai.atoms.agent.session import AgentSession
 
-# Create a session
-session = AgentSession()
+async def on_start(session: AgentSession):
+    # 1. Add nodes/agents to the session
+    session.add_node(my_agent)
 
-# Add nodes/agents
-session.add_node(my_agent)
+    # 2. Start the processing loop
+    await session.start()
 
-# Start processing
-await session.start()
+    # 3. Wait for session to complete (e.g. user disconnect)
+    await session.wait_until_complete()
+
+if __name__ == "__main__":
+    # You don't create the session directly; the server does.
+    app = AtomsApp(setup_handler=on_start)
+    app.run()
 ```
+
 
 ## Key Methods
 
