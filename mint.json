@@ -17,8 +17,8 @@
         }
     ],
     "topbarCtaButton": {
-        "name": "Smallest AI Home",
-        "url": "https://smallest.ai"
+        "name": "GitHub",
+        "url": "https://github.com/smallest-inc/smallest-python-sdk"
     },
     "navigation": [
         {
