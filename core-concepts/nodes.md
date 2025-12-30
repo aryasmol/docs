@@ -21,9 +21,9 @@ In the conceptual graph, a Node is a vertex that performs three key actions:
   </Card>
 </CardGroup>
 
-## Two Types of Nodes
+## Abstracted Nodes
 
-Atoms provides two primary base classes to inherit from, depending on your needs.
+To help you get started quickly, we have abstracted two common node patterns for you. You can use these out of the box or build your own custom nodes from scratch.
 
 ### 1. The Output Agent (`OutputAgentNode`)
 
