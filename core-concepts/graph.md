@@ -12,17 +12,9 @@ In Atoms, an "agent" is not a single monolithic entity but a **directed acyclic 
 
 ## Key Properties
 
-<CardGroup cols={3}>
-  <Card title="Directed Flow" icon="arrow-right">
-    Events and control move in a specific direction through the graph.
-  </Card>
-  <Card title="Event Highway" icon="truck-fast">
-    The graph serves as the propagation channel for all system and user events.
-  </Card>
-  <Card title="Platform Managed" icon="seedling">
-    The framework handles entry points, traversal, and lifecycle management automatically.
-  </Card>
-</CardGroup>
+- **Directed Flow**: Events and control move in a specific direction through the graph.
+- **Event Highway**: The graph serves as the propagation channel for all system and user events.
+- **Platform Managed**: The framework handles entry points, traversal, and lifecycle management automatically.
 
 <Warning>
   **No Cycles Allowed**

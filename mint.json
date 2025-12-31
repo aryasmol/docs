@@ -45,11 +45,11 @@
             ]
         },
         {
-            "group": "Patterns",
+            "group": "Cookbooks",
             "pages": [
-                "patterns/orchestration",
-                "patterns/tools",
-                "patterns/custom-events"
+                "cookbooks/orchestration",
+                "cookbooks/tools",
+                "cookbooks/custom-events"
             ]
         }
     ]

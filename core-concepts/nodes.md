@@ -9,17 +9,17 @@ A **Node** is the basic unit of computation in the Atoms graph. Every "agent" or
 
 In the conceptual graph, a Node is a vertex that performs three key actions:
 
-<CardGroup cols={3}>
-  <Card title="Receives" icon="inbox">
+<Steps>
+  <Step title="Receives">
     Accepts incoming events like user audio, text, or system triggers.
-  </Card>
-  <Card title="Processes" icon="microchip">
+  </Step>
+  <Step title="Processes">
     Executes custom Python code, business logic, or AI inference.
-  </Card>
-  <Card title="Sends" icon="paper-plane">
+  </Step>
+  <Step title="Sends">
     Manually emits new events to pass control to the rest of the graph.
-  </Card>
-</CardGroup>
+  </Step>
+</Steps>
 
 ## Abstracted Nodes
 

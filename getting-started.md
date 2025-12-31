@@ -7,7 +7,7 @@ This guide will walk you through installing the SDK, writing your first intellig
 
 ## 1. Installation
 
-First, install the Atoms SDK using pip. Usage of a virtual environment is recommended.
+First, install the Atoms SDK using pip.
 
 ```bash
 pip install smallestai
@@ -15,11 +15,11 @@ pip install smallestai
 
 ## 2. Write Your First Agent
 
-We will create a simple "Echo Agent" that uses OpenAI to generate responses.
+We will create a simple "Echo Agent" that uses OpenAI to generate responses. We need two files: one for the agent logic, and one to run the server.
 
 <Steps>
   <Step title="Create my_agent.py">
-    This file defines the agent's behavior. We inherit from `OutputAgentNode` to create a user-facing agent.
+    This file defines *what* your agent does. We use `OutputAgentNode` to create a standard conversational agent.
 
     ```python my_agent.py
     from smallestai.atoms.agent.nodes import OutputAgentNode
@@ -40,7 +40,7 @@ We will create a simple "Echo Agent" that uses OpenAI to generate responses.
   </Step>
 
   <Step title="Create server.py">
-    This file sets up the session and runs the server.
+    This file runs your agent as a service.
 
     ```python server.py
     from smallestai.atoms.agent.server import AtomsApp
@@ -53,57 +53,56 @@ We will create a simple "Echo Agent" that uses OpenAI to generate responses.
         # Start the processing loop
         await session.start()
         
-        # Wait for the session to finish
+        # Keep the session alive
         await session.wait_until_complete()
 
     if __name__ == "__main__":
-        # Create and run the server
         app = AtomsApp(setup_handler=on_start)
         app.run()
     ```
+
+    > **Why do I need a server?**
+    > Unlike a simple script that runs once and exits, conversational agents need to maintain a connection. `server.py` starts a **WebSocket server** that handles real-time, bidirectional audio or text streams. This enables your agent to listen and speak simultaneously (interruptibility) and maintain state across a long conversation.
   </Step>
 </Steps>
 
 ## 3. Initialize & Go Live
 
-Before you can chat, you must link your code to an Atoms agent and make it live on the platform.
+To make your agent accessible to the world (or your frontend), deploy it to the Atoms platform.
 
 <Steps>
   <Step title="Initialize">
-    Link your directory to an agent.
+    Link your directory to a project.
     ```bash
     smallestai agent init
     ```
   </Step>
 
   <Step title="Deploy">
-    Deploy the agent to atoms infra.
+    Push your code to the cloud.
     ```bash
     smallestai agent deploy
     ```
   </Step>
 
   <Step title="Make Live">
-    Promote your build to serve traffic.
     1. Run `smallestai agent builds`
-    2. Select your new build
-    3. Choose **Make Live**
+    2. Select your latest build and choose **Make Live**
   </Step>
 </Steps>
 
-## 4. Run It
+## 4. Run Locally
 
-The Atoms CLI is used for management (deploy, auth), but to run your agent locally, you execute the server file directly.
+You can also run your agent locally for testing.
 
 ```bash
 python server.py
 ```
+This starts the WebSocket server on `http://0.0.0.0:8080`.
 
-You should see logs indicating the server is running on `http://0.0.0.0:8080`.
+## 5. Chat
 
-## 5. Test It
-
-You can now connect to your agent using the CLI chat tool.
+Use the CLI to chat with your running agent.
 
 ```bash
 smallestai agent chat
@@ -111,13 +110,13 @@ smallestai agent chat
 
 ## What's Next?
 
-Now that you have a running agent, explore common **Patterns** to add more power.
+Now that you have a running agent, explore **Cookbooks** to see what else you can build.
 
 <CardGroup cols={2}>
-  <Card title="Tool Calling" icon="toolbox" href="/patterns/tools">
+  <Card title="Tool Calling" icon="toolbox" href="/cookbooks/tools">
     Give your agent calculators, search, and APIs.
   </Card>
-  <Card title="Orchestration" icon="diagram-project" href="/patterns/orchestration">
+  <Card title="Orchestration" icon="diagram-project" href="/cookbooks/orchestration">
     Connect multiple agents for complex workflows.
   </Card>
 </CardGroup>

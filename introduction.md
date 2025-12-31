@@ -1,36 +1,25 @@
 ---
 title: "What is Atoms SDK?"
-description: "Build intelligent, multi-agent systems with fine-grained control."
+description: "Build intelligent, real-time AI agents in Python."
 ---
 
-Atoms SDK enables developers to build conversational AI systems by composing specialized agents in a graph structure.
-
-<CardGroup cols={2}>
-  <Card title="Fine-grained Control" icon="sliders">
-    Manage agent behavior, routing, and tool execution with precision.
-  </Card>
-  <Card title="Low Latency" icon="bolt">
-    Built for streaming environments like telephony and real-time web calls.
-  </Card>
-  <Card title="Graph-based" icon="circle-nodes">
-    Compose agents into directed graphs for complex workflows.
-  </Card>
-  <Card title="Code-first" icon="code">
-    Keep reasoning logic in code while offloading orchestration.
-  </Card>
-</CardGroup>
+The Atoms SDK is a framework for building low-latency, stateful AI applications. It handles the complexity of streaming audio, managing conversation state, and coordinating tools, so you can focus on your agent's logic.
 
 ## Why Atoms?
 
-Atoms addresses the complexity of modern AI applications by providing a structured, event-driven framework.
+Most LLM frameworks are designed for simple chatbots. Atoms is built for **real-time, voice-first experiences**.
 
-### Designed for Scale
-Whether you are building valid customer support agents, sales bots, or complex internal tools, Atoms provides the primitives you need to scale from a single prompt to a thousand concurrent sessions.
+*   **Streaming First**: Built to handle real-time audio and text streams with < 500ms latency.
+*   **Interruptible**: Automatically handles user interruptions during playback (voice).
+*   **Stateful**: Maintains context across long-running sessions, unlike stateless REST APIs.
 
-### Key Capabilities
-- **Event-driven**: Unified event model for user messages, system signals, and tool outputs.
-- **Stateful Nodes**: Persistent context management across long-running sessions.
-- **Flexible Routing**: Dynamic traffic control between specialized agents.
+## How it Works
+
+The SDK provides a simple, code-first way to structure your application:
+
+*   **Composable Logic**: Break complex behaviors into reusable [Nodes](/core-concepts/nodes).
+*   **Event Driven**: Unified [Event](/core-concepts/events) system for messages, signals, and tools.
+*   **Python Native**: Write standard Python code; no hidden configuration files or DSLs.
 
 ## What Next?
 
@@ -42,7 +31,7 @@ Whether you are building valid customer support agents, sales bots, or complex i
     Master the command line tools.
   </Card>
 
-  <Card title="Patterns" icon="layer-group" href="/patterns/orchestration">
+  <Card title="Cookbooks" icon="layer-group" href="/cookbooks/orchestration">
     Explore common architectural patterns.
   </Card>
 </CardGroup>

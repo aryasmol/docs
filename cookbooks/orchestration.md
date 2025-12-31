@@ -5,14 +5,8 @@ description: "Architectural recipes for connecting multiple agents."
 
 Building a single agent is powerful, but connecting multiple specialized agents creates a system that is greater than the sum of its parts. This page explores common patterns for orchestrating these connections.
 
-<CardGroup cols={2}>
-  <Card title="The Router" icon="signs-post">
-    A central node analyzes intent and directs traffic to the right specialist.
-  </Card>
-  <Card title="The Handoff" icon="handshake">
-    One agent explicitly passes control to another when it hits a boundary.
-  </Card>
-</CardGroup>
+- **The Router**: A central node analyzes intent and directs traffic to the right specialist.
+- **The Handoff**: One agent explicitly passes control to another when it hits a boundary.
 
 ## Implementation Patterns
 
