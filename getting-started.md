@@ -3,11 +3,9 @@ title: "Getting Started"
 description: "From zero to a running AI agent in 5 minutes."
 ---
 
-This guide will walk you through installing the SDK, writing your first intelligent agent, and running it locally.
+This guide will walk you through installing the SDK, writing your first intelligent agent, and running it.
 
 ## 1. Installation
-
-First, install the Atoms SDK using pip.
 
 ```bash
 pip install smallestai
@@ -15,11 +13,11 @@ pip install smallestai
 
 ## 2. Write Your First Agent
 
-We will create a simple agent that uses OpenAI to generate responses. We need two files: one for the agent logic, and one to run the application.
+We need two files: one for the agent logic, and one to run the application.
 
 <Steps>
   <Step title="Create my_agent.py">
-    This file defines *what* your agent does. We use `OutputAgentNode` to create a standard conversational agent.
+    This file defines *what* your agent does.
 
     ```python my_agent.py
     from smallestai.atoms.agent.nodes import OutputAgentNode
@@ -28,11 +26,9 @@ We will create a simple agent that uses OpenAI to generate responses. We need tw
     class MyAgent(OutputAgentNode):
         def __init__(self):
             super().__init__(name="my-agent")
-            # Initialize OpenAI client (requires OPENAI_API_KEY env var)
             self.llm = OpenAIClient(model="gpt-4o-mini")
 
         async def generate_response(self):
-            # Stream the response from the LLM based on conversation context
             async for chunk in await self.llm.chat(self.context.messages, stream=True):
                 if chunk.content:
                     yield chunk.content
@@ -48,12 +44,8 @@ We will create a simple agent that uses OpenAI to generate responses. We need tw
     from my_agent import MyAgent
 
     async def on_start(session: AgentSession):
-        # Add our agent to the session
         session.add_node(MyAgent())
-        # Start the processing loop
         await session.start()
-        
-        # Keep the session alive
         await session.wait_until_complete()
 
     if __name__ == "__main__":
@@ -67,50 +59,55 @@ We will create a simple agent that uses OpenAI to generate responses. We need tw
   </Step>
 </Steps>
 
-## 3. Initialize & Deploy
+## 3. Run Your Agent
 
-To deploy your agent to the cloud, link your directory to a project and push your code.
+Once your files are ready, you have two options:
 
-<Steps>
-  <Step title="Initialize">
-    Link your directory to a project on the platform.
+<Tabs>
+  <Tab title="Run Locally">
+    For development and testing, just run the file directly:
+
     ```bash
-    smallestai agent init
+    python main.py
     ```
-  </Step>
 
-  <Step title="Deploy">
-    Push your code to the cloud.
+    Then chat with it:
     ```bash
-    smallestai agent deploy --entry-point main.py
+    smallestai agent chat
     ```
-  </Step>
 
-  <Step title="Make Live">
-    1. Run `smallestai agent builds`
-    2. Select your latest build and choose **Make Live**
-  </Step>
-</Steps>
+    No account or deployment needed.
+  </Tab>
 
-## 4. Run Locally
+  <Tab title="Deploy to Platform">
+    To have SmallestAI host your agent in the cloud (for production, API access, or phone calls):
 
-You can also run your agent locally for testing.
-
-```bash
-python main.py
-```
-
-## 5. Chat
-
-Use the CLI to chat with your running agent.
-
-```bash
-smallestai agent chat
-```
+    <Steps>
+      <Step title="Login">
+        ```bash
+        smallestai auth login
+        ```
+      </Step>
+      <Step title="Initialize">
+        Link your directory to an agent on the platform.
+        ```bash
+        smallestai agent init
+        ```
+      </Step>
+      <Step title="Deploy">
+        Push your code to the cloud.
+        ```bash
+        smallestai agent deploy --entry-point main.py
+        ```
+      </Step>
+      <Step title="Make Live">
+        Run `smallestai agent builds`, select your build, and choose **Make Live**.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
 
 ## What's Next?
-
-Now that you have a running agent, explore **Cookbooks** to see what else you can build.
 
 <CardGroup cols={2}>
   <Card title="Tool Calling" icon="toolbox" href="/cookbooks/tools">

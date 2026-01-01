@@ -1,60 +1,104 @@
 ---
-title: "Overview"
-description: "Manage your Atoms agents from the command line."
+title: "CLI Reference"
+description: "Deploy your agents to the SmallestAI platform."
 ---
 
-The Atoms CLI is the primary way to manage, test, and deploy your agents. It allows you to initialize projects, run local servers, and push your code to the Atoms platform.
+The CLI is used to deploy your agent to SmallestAI infrastructure. If you just want to run locally, you don't need the CLI—just run `python main.py`.
+
+<Note>
+  **When to use the CLI**: Use the CLI when you want SmallestAI to host your agent in the cloud for production use, making it accessible via API or phone calls.
+</Note>
 
 ## Installation
 
-The CLI is included with the main SDK package.
+The CLI is included with the SDK.
 
 ```bash
 pip install smallestai
 ```
 
-## Verification
-
-To verify your installation, run:
-
+Verify with:
 ```bash
 smallestai --help
 ```
 
-You should see an output similar to this:
+---
 
-```text Terminal Output
-Usage: smallestai [OPTIONS] COMMAND [ARGS]...
+## Auth
 
-  SmallestAI CLI
+### `login`
 
-╭─ Options ────────────────────────────────────────────────────────────╮
-│ --install-completion          Install completion for the current     │
-│                               shell.                                 │
-│ --show-completion             Show completion for the current shell, │
-│                               to copy it or customize the            │
-│                               installation.                          │
-│ --help                        Show this message and exit.            │
-╰──────────────────────────────────────────────────────────────────────╯
-╭─ Commands ───────────────────────────────────────────────────────────╮
-│ agent                                                                │
-│ auth                                                                 │
-╰──────────────────────────────────────────────────────────────────────╯
+Authenticate with your SmallestAI account.
+
+```bash
+smallestai auth login
 ```
 
-## Basic Workflow
+### `logout`
 
-<Steps>
-  <Step title="Login">
-    Authenticate with your Smallest AI account.
-    `smallestai auth login`
-  </Step>
-  <Step title="Initialize">
-    Link your local directory to a created agent.
-    `smallestai agent init`
-  </Step>
-  <Step title="Deploy">
-    Push your code to the cloud.
-    `smallestai agent deploy`
-  </Step>
-</Steps>
+Clear your local credentials.
+
+```bash
+smallestai auth logout
+```
+
+---
+
+## Agent Commands
+
+### `init`
+
+Link your local directory to an agent on the platform.
+
+```bash
+smallestai agent init
+```
+
+### `deploy`
+
+Package and deploy your agent code to the cloud.
+
+```bash
+smallestai agent deploy --entry-point main.py
+```
+
+**Options:**
+- `-e, --entry-point`: The file to run. Defaults to `server.py`, but you can specify any file.
+
+### `chat`
+
+Start an interactive chat session with your **locally running** agent (connects to `localhost:8080`).
+
+```bash
+smallestai agent chat
+```
+
+### `builds`
+
+View deployment history and manage which version is serving traffic.
+
+```bash
+smallestai agent builds
+```
+
+---
+
+## Going Live
+
+Deployments are **not live** by default. To serve traffic:
+
+1. Run `smallestai agent builds`
+2. Select the build you want to promote
+3. Choose **Make Live**
+
+<Warning>
+  **One Agent, One Live Build.** Making a new build live automatically replaces the previous one.
+</Warning>
+
+## Taking Down
+
+To stop serving traffic:
+
+1. Run `smallestai agent builds`
+2. Select the **LIVE** build
+3. Choose **Take Down**
