@@ -65,13 +65,14 @@ Once your files are ready, you have two options:
 
 <Tabs>
   <Tab title="Run Locally">
-    For development and testing, just run the file directly:
+    For development and testing, run the file directly:
 
     ```bash
     python main.py
     ```
 
-    Then chat with it:
+    This starts a WebSocket server on `localhost:8080`. In a separate terminal, connect to it:
+
     ```bash
     smallestai agent chat
     ```
