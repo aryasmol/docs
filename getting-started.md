@@ -15,7 +15,7 @@ pip install smallestai
 
 ## 2. Write Your First Agent
 
-We will create a simple "Echo Agent" that uses OpenAI to generate responses. We need two files: one for the agent logic, and one to run the server.
+We will create a simple agent that uses OpenAI to generate responses. We need two files: one for the agent logic, and one to run the application.
 
 <Steps>
   <Step title="Create my_agent.py">
@@ -39,10 +39,10 @@ We will create a simple "Echo Agent" that uses OpenAI to generate responses. We 
     ```
   </Step>
 
-  <Step title="Create server.py">
+  <Step title="Create main.py">
     This file runs your agent as a service.
 
-    ```python server.py
+    ```python main.py
     from smallestai.atoms.agent.server import AtomsApp
     from smallestai.atoms.agent.session import AgentSession
     from my_agent import MyAgent
@@ -61,27 +61,35 @@ We will create a simple "Echo Agent" that uses OpenAI to generate responses. We 
         app.run()
     ```
 
-    > **Why do I need a server?**
-    > Unlike a simple script that runs once and exits, conversational agents need to maintain a connection. `server.py` starts a **WebSocket server** that handles real-time, bidirectional audio or text streams. This enables your agent to listen and speak simultaneously (interruptibility) and maintain state across a long conversation.
+    > **Why do I need a server file?**
+    > Unlike a simple script that runs once and exits, conversational agents need to maintain a connection. This file starts a **WebSocket server** that handles real-time, bidirectional audio or text streams. This enables your agent to listen and speak simultaneously and maintain state across a long conversation.
   </Step>
 </Steps>
 
-## 3. Initialize & Go Live
+<Note>
+  **Flexible Entry Point**: Your main file can be named anything (`app.py`, `run.py`, etc.). When deploying, just tell the CLI which file to run:
+  ```bash
+  smallestai agent deploy --entry-point your_file.py
+  ```
+  The default is `server.py`, but you're not locked into this.
+</Note>
 
-To make your agent accessible to the world (or your frontend), deploy it to the Atoms platform.
+## 3. Initialize & Deploy
+
+To deploy your agent to the cloud, link your directory to a project and push your code.
 
 <Steps>
   <Step title="Initialize">
-    Link your directory to a project.
+    Link your directory to a project on the platform.
     ```bash
     smallestai agent init
     ```
   </Step>
 
   <Step title="Deploy">
-    Push your code to the cloud.
+    Push your code to the cloud. Since our entry point is `main.py`, we specify it:
     ```bash
-    smallestai agent deploy
+    smallestai agent deploy --entry-point main.py
     ```
   </Step>
 
@@ -96,7 +104,7 @@ To make your agent accessible to the world (or your frontend), deploy it to the 
 You can also run your agent locally for testing.
 
 ```bash
-python server.py
+python main.py
 ```
 This starts the WebSocket server on `http://0.0.0.0:8080`.
 

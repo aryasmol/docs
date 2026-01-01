@@ -48,7 +48,12 @@ smallestai agent deploy [OPTIONS]
 ```
 
 **Options:**
-- `-e, --entry-point`: The file to run (default: `server.py`).
+- `-e, --entry-point`: The file to run. Defaults to `server.py`, but you can specify any file (e.g., `main.py`, `app.py`).
+
+**Example:**
+```bash
+smallestai agent deploy --entry-point main.py
+```
 
 ### `chat`
 
