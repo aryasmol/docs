@@ -40,7 +40,7 @@ We will create a simple agent that uses OpenAI to generate responses. We need tw
   </Step>
 
   <Step title="Create main.py">
-    This file runs your agent as a service.
+    This file is the entry point that runs your agent. It handles real-time, bidirectional streams so your agent can listen and respond simultaneously.
 
     ```python main.py
     from smallestai.atoms.agent.server import AtomsApp
@@ -61,18 +61,11 @@ We will create a simple agent that uses OpenAI to generate responses. We need tw
         app.run()
     ```
 
-    > **Why do I need a server file?**
-    > Unlike a simple script that runs once and exits, conversational agents need to maintain a connection. This file starts a **WebSocket server** that handles real-time, bidirectional audio or text streams. This enables your agent to listen and speak simultaneously and maintain state across a long conversation.
+    <Tip>
+      Your entry point can be named anything (`app.py`, `run.py`, etc.). When deploying, specify it with `--entry-point your_file.py`.
+    </Tip>
   </Step>
 </Steps>
-
-<Note>
-  **Flexible Entry Point**: Your main file can be named anything (`app.py`, `run.py`, etc.). When deploying, just tell the CLI which file to run:
-  ```bash
-  smallestai agent deploy --entry-point your_file.py
-  ```
-  The default is `server.py`, but you're not locked into this.
-</Note>
 
 ## 3. Initialize & Deploy
 
@@ -87,7 +80,7 @@ To deploy your agent to the cloud, link your directory to a project and push you
   </Step>
 
   <Step title="Deploy">
-    Push your code to the cloud. Since our entry point is `main.py`, we specify it:
+    Push your code to the cloud.
     ```bash
     smallestai agent deploy --entry-point main.py
     ```
@@ -106,7 +99,6 @@ You can also run your agent locally for testing.
 ```bash
 python main.py
 ```
-This starts the WebSocket server on `http://0.0.0.0:8080`.
 
 ## 5. Chat
 
