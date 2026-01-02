@@ -97,7 +97,7 @@ Once your files are ready, you have two options:
     To have SmallestAI host your agent in the cloud (for production, API access, or phone calls):
 
     <Note>
-      **Prerequisite:** You must first create an agent on the [SmallestAI Console](https://console.smallest.ai). The `agent init` command links your local code to that agent.
+      **Prerequisite:** You must first create an agent on the [Atoms Console](https://atoms.smallest.ai). The `agent init` command links your local code to that agent.
     </Note>
 
     <Steps>
