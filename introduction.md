@@ -3,23 +3,12 @@ title: "What is Atoms SDK?"
 description: "Build intelligent, real-time AI agents in Python."
 ---
 
-The Atoms SDK is a framework for building low-latency, stateful AI applications. It handles the complexity of streaming audio, managing conversation state, and coordinating tools, so you can focus on your agent's logic.
+The Atoms SDK is the Python framework for building agents on the [Atoms platform](https://smallest.ai). It provides the primitives for low-latency, stateful AI applications—handling streaming audio, conversation state, and tool coordination so you can focus on your agent's logic.
 
-## Why Atoms?
-
-Most LLM frameworks are designed for simple chatbots. Atoms is built for **real-time, voice-first experiences**.
-
-*   **Streaming First**: Built to handle real-time audio and text streams with < 500ms latency.
-*   **Interruptible**: Automatically handles user interruptions during playback (voice).
-*   **Stateful**: Maintains context across long-running sessions, unlike stateless REST APIs.
-
-## How it Works
-
-The SDK provides a simple, code-first way to structure your application:
-
-*   **Composable Logic**: Break complex behaviors into reusable [Nodes](/core-concepts/nodes).
-*   **Event Driven**: Unified [Event](/core-concepts/events) system for messages, signals, and tools.
-*   **Python Native**: Write standard Python code; no hidden configuration files or DSLs.
+- **Streaming First**: Real-time audio and text streams with < 500ms latency.
+- **Interruptible**: Automatic handling of user interruptions during playback.
+- **Composable**: Break complex behaviors into reusable [Nodes](/core-concepts/nodes).
+- **Event Driven**: Unified [Event](/core-concepts/events) system for messages, signals, and tools.
 
 ## What Next?
 
@@ -28,7 +17,7 @@ The SDK provides a simple, code-first way to structure your application:
     Build your first agent in under 5 minutes.
   </Card>
   <Card title="CLI Reference" icon="terminal" href="/cli/overview">
-    Master the command line tools.
+    Deploy to the SmallestAI cloud.
   </Card>
 
   <Card title="Cookbooks" icon="layer-group" href="/cookbooks/orchestration">

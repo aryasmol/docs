@@ -50,6 +50,10 @@ smallestai auth logout
 
 Link your local directory to an agent on the platform.
 
+<Note>
+  **Prerequisite:** You must first create an agent on the [SmallestAI Console](https://console.smallest.ai). This command will prompt you to select from your existing agents.
+</Note>
+
 ```bash
 smallestai agent init
 ```

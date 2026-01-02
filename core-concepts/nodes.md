@@ -9,17 +9,9 @@ A **Node** is the basic unit of computation in the Atoms graph. Every "agent" or
 
 In the conceptual graph, a Node is a vertex that performs three key actions:
 
-<Steps>
-  <Step title="Receives">
-    Accepts incoming events like user audio, text, or system triggers.
-  </Step>
-  <Step title="Processes">
-    Executes custom Python code, business logic, or AI inference.
-  </Step>
-  <Step title="Sends">
-    Manually emits new events to pass control to the rest of the graph.
-  </Step>
-</Steps>
+- **Receive**: Accept incoming events like user audio, text, or system triggers.
+- **Process**: Execute custom Python code, business logic, or AI inference.
+- **Send**: Emit new events to pass control to the rest of the graph.
 
 ## Abstracted Nodes
 
@@ -31,7 +23,7 @@ This is the most common node type. It is a full-featured conversational agent de
 
 **Key Features:**
 *   **Auto-Interruption**: Automatically handles user interruptions during playback only when the user is speaking.
-*   **Streaming**: Managers the complexity of streaming LLM tokens to the user in real-time.
+*   **Streaming**: Manages the complexity of streaming LLM tokens to the user in real-time.
 *   **Context Management**: Maintains conversation history automatically.
 
 **Use Case**: The "brain" of your bot—Sales Agent, Support Agent, Triage Agent.

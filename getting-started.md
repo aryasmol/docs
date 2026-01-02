@@ -5,13 +5,22 @@ description: "From zero to a running AI agent in 5 minutes."
 
 This guide will walk you through installing the SDK, writing your first intelligent agent, and running it.
 
-## 1. Installation
+## 1. Prerequisites
+
+<Note>
+  **OpenAI API Key required.** Set it as an environment variable before running your agent:
+  ```bash
+  export OPENAI_API_KEY="your-key-here"
+  ```
+</Note>
+
+## 2. Installation
 
 ```bash
 pip install smallestai
 ```
 
-## 2. Write Your First Agent
+## 3. Write Your First Agent
 
 We need two files: one for the agent logic, and one to run the application.
 
@@ -20,13 +29,17 @@ We need two files: one for the agent logic, and one to run the application.
     This file defines *what* your agent does.
 
     ```python my_agent.py
+    import os
     from smallestai.atoms.agent.nodes import OutputAgentNode
     from smallestai.atoms.agent.clients.openai import OpenAIClient
 
     class MyAgent(OutputAgentNode):
         def __init__(self):
             super().__init__(name="my-agent")
-            self.llm = OpenAIClient(model="gpt-4o-mini")
+            self.llm = OpenAIClient(
+                model="gpt-4o-mini",
+                api_key=os.getenv("OPENAI_API_KEY")
+            )
 
         async def generate_response(self):
             async for chunk in await self.llm.chat(self.context.messages, stream=True):
@@ -36,7 +49,7 @@ We need two files: one for the agent logic, and one to run the application.
   </Step>
 
   <Step title="Create main.py">
-    This file is the entry point that runs your agent. It handles real-time, bidirectional streams so your agent can listen and respond simultaneously.
+    This file is the entry point that runs your agent.
 
     ```python main.py
     from smallestai.atoms.agent.server import AtomsApp
@@ -59,7 +72,7 @@ We need two files: one for the agent logic, and one to run the application.
   </Step>
 </Steps>
 
-## 3. Run Your Agent
+## 4. Run Your Agent
 
 Once your files are ready, you have two options:
 
@@ -83,6 +96,10 @@ Once your files are ready, you have two options:
   <Tab title="Deploy to Platform">
     To have SmallestAI host your agent in the cloud (for production, API access, or phone calls):
 
+    <Note>
+      **Prerequisite:** You must first create an agent on the [SmallestAI Console](https://console.smallest.ai). The `agent init` command links your local code to that agent.
+    </Note>
+
     <Steps>
       <Step title="Login">
         ```bash
@@ -90,7 +107,7 @@ Once your files are ready, you have two options:
         ```
       </Step>
       <Step title="Initialize">
-        Link your directory to an agent on the platform.
+        Link your directory to an existing agent on the platform.
         ```bash
         smallestai agent init
         ```
