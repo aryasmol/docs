@@ -3,29 +3,37 @@ title: 'Logs'
 description: 'Retrieve conversation logs and details.'
 ---
 
-The `LogsApi` allows you to access detailed logs for specific conversations. This is useful for auditing, debugging, and analyzing agent performance.
+The `Call` module allows you to access detailed logs and analytics for your conversations.
 
-## Initialize Logs API
+## Clients
 
 ```python
-from smallestai.atoms.api import LogsApi
+from smallestai.atoms.call import Call
 
-# Initialize the API client
-api = LogsApi()
+call = Call()
 ```
 
-## Get Conversation Logs
+## Get Call Logs
 
-Retrieve detailed logs for a specific conversation using its `call_id`.
+Retrieve details and transcript for a specific conversation using its `call_id`.
 
 ```python
 # specific_call_id is a string, usually a UUID
 call_id = "your_call_id_here"
 
 try:
-    # Get conversation details
-    logs = api.conversation_id_get(id=call_id)
-    print(f"Logs for call {call_id}: {logs}")
+    # Get conversation details 
+    details = call.get_call(call_id)
+    data = details["data"]
+    
+    print(f"Status: {data['status']}")
+    print(f"Transcript lines: {len(data.get('transcript', []))}")
+    
+    # Access post-call analytics if available
+    analytics = data.get("postCallAnalytics", {})
+    if analytics:
+        print(f"Summary: {analytics.get('summary')}")
+
 except Exception as e:
     print(f"Error fetching logs: {e}")
 ```

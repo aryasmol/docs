@@ -3,16 +3,16 @@ title: "Campaigns"
 description: "Manage outbound calling campaigns."
 ---
 
-The `CampaignsApi` allows you to create and manage bulk outbound calling campaigns.
+The `Campaign` module allows you to create and manage bulk outbound calling campaigns easily.
 
 ## Clients
 
 ```python
-from smallestai.atoms.api_client import ApiClient
-from smallestai.atoms.api.campaigns_api import CampaignsApi
+from smallestai.atoms.campaign import Campaign
+from smallestai.atoms.audience import Audience
 
-client = ApiClient()
-api = CampaignsApi(client)
+campaign = Campaign()
+audience = Audience()
 ```
 
 ## Operations
@@ -22,14 +22,28 @@ api = CampaignsApi(client)
 Launch a new outbound campaign.
 
 ```python
-from smallestai.atoms.models import CampaignPostRequest
-
-campaign = api.campaigns_post(
-    campaign_post_request=CampaignPostRequest(
-        name="Q3 Outreach",
-        agentId="your-agent-id",
-        contacts_list_id="contacts-list-id"
-    )
+# 1. Create an audience first
+aud_response = audience.create(
+    name="Q3 Outreach List",
+    phone_numbers=["+14155551234"],
+    names=[("John", "Doe")]
 )
-print(f"Campaign Launched: {campaign.id}")
+audience_id = aud_response["data"]["_id"]
+
+# 2. Create the campaign
+camp_response = campaign.create(
+    name="Q3 Outreach",
+    agent_id="your-agent-id",
+    audience_id=audience_id,
+    phone_ids=["your-phone-id"],  # Get from client.get_phone_numbers()
+    description="Sales outreach",
+    max_retries=2,
+    retry_delay=15
+)
+campaign_id = camp_response["data"]["_id"]
+print(f"Campaign Created: {campaign_id}")
+
+# 3. Start the campaign
+campaign.start(campaign_id)
+print("Campaign Started")
 ```

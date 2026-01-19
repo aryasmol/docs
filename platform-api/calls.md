@@ -3,16 +3,14 @@ title: "Calls"
 description: "Retrieve call history and transcripts."
 ---
 
-The `CallsApi` provides access to your agent's call history.
+The `Call` module provides access to your agent's call history, transcripts, and analytics.
 
 ## Clients
 
 ```python
-from smallestai.atoms.api_client import ApiClient
-from smallestai.atoms.api.calls_api import CallsApi
+from smallestai.atoms.call import Call
 
-client = ApiClient()
-api = CallsApi(client)
+call = Call()
 ```
 
 ## Operations
@@ -22,9 +20,10 @@ api = CallsApi(client)
 Fetch a list of recent calls.
 
 ```python
-calls = api.calls_get(limit=10)
-for call in calls.items:
-    print(f"Call ID: {call.id} | Status: {call.status}")
+calls = call.get_calls(limit=10)
+
+for log in calls["data"]["logs"]:
+    print(f"Call ID: {log['callId']} | Status: {log['status']}")
 ```
 
 ### Get Call Details
@@ -32,7 +31,13 @@ for call in calls.items:
 Get detailed information, including transcripts, for a specific call.
 
 ```python
-call_details = api.calls_id_get(id="call-id")
-print(f"Duration: {call_details.duration_seconds}s")
-print(f"Transcript: {call_details.transcript}")
+details = call.get_call("call-id-uuid")
+data = details["data"]
+
+print(f"Duration: {data['duration']}s")
+print(f"Status: {data['status']}")
+
+# Transcript
+for msg in data.get("transcript", []):
+    print(f"{msg['role']}: {msg['content']}")
 ```

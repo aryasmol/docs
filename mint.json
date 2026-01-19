@@ -50,6 +50,18 @@
                 "cookbooks/tools",
                 "cookbooks/custom-events"
             ]
+        },
+        {
+            "group": "Platform API",
+            "pages": [
+                "platform-api/overview",
+                "platform-api/agents",
+                "platform-api/calls",
+                "platform-api/campaigns",
+                "platform-api/logs",
+                "platform-api/organization",
+                "platform-api/user"
+            ]
         }
     ]
 }
